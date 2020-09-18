@@ -1,0 +1,23 @@
+.footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    height: 140px;
+    font-size: 15px;
+    line-height: 23px;
+    font-weight: 400;
+    color: #000;
+    background-color: #FFFAF0;
+    border-top: 3px solid $secondarycolor;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    & div a img {
+        height: 40px;
+        width: 200px;
+        margin: 0 auto;
+        justify-content: center;
+    }
+}

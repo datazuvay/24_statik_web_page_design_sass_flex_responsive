@@ -1,0 +1,96 @@
+.section {
+    &__hero {
+        background-image: url(./images/showcase.jpg);
+        height: 52%;
+        padding: 1px;
+        &--head {
+            font-weight: 700;
+            font-size: 55px;
+            line-height: 83px;
+            color: #fff;
+            // padding: 1px;
+            margin: 7% auto 2%;
+            text-align: center;
+        }
+        &--para {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 30px;
+            color: #fff;
+            text-align: center;
+            margin: 0 10%;
+        }
+    }
+    &__newsletter {
+        display: flex;
+        justify-content: space-around;
+        height: 10%;
+        font-size: 15px;
+        line-height: 23px;
+        font-weight: 400;
+        padding: 0.8%;
+        color: #fff;
+        background-color: #35424A;
+        &--subscribe {
+            margin: auto;
+            font-size: 23px;
+            line-height: 34px;
+            font-weight: 700;
+        }
+        &--email {
+            display: flex;
+            margin: auto;
+            align-items: center;
+            &-input {
+                width: 40vh;
+                height: 4vh;
+            }
+            &-button {
+                width: 30%;
+                height: 4.5vh;
+                margin-left: 2%;
+                background-color: #A9508B;
+                color: white;
+                border: none;
+            }
+        }
+    }
+    &__logo {
+        margin: 10px;
+        display: flex;
+        // width: 350;
+        // height: auto;
+        justify-content: center;
+        align-content: center;
+        // border: 2px solid red;
+        & div {
+            // justify-content: center;
+            // align-content: center;
+            text-align: center;
+            margin: 30px 5px;
+            // border: 2px solid red;
+            width: 370px;
+            height: 230px;
+            // display: flex;
+            // flex-direction: column;
+        }
+        & img {
+            width: 6.5vw;
+            height: 12vh;
+            margin: 0;
+        }
+        & h3 {
+            font-size: 18px;
+            line-height: 26px;
+            font-weight: 700;
+            margin: 5%;
+            color: #000;
+        }
+        & p {
+            font-size: 15px;
+            line-height: 23px;
+            font-weight: 400;
+            color: #000;
+        }
+    }
+}

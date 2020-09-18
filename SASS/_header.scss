@@ -1,0 +1,57 @@
+.header {
+    display: flex;
+    height: 100px;
+    padding: 20px;
+    justify-content: space-between;
+    background-color: $primarycolor;
+    align-items: center;
+    border-bottom: 3px solid $secondarycolor;
+    box-sizing: border-box;
+    &__left {
+        white-space: nowrap; //stops the logo to wrap when the screen narrows down
+        margin-left: 9%;
+        & p {
+            color: white;
+            font-size: 30px;
+            line-height: 45px;
+            font-weight: 700;
+            & span {
+                color: $secondarycolor;
+            }
+        }
+    }
+    &__right {
+        margin-right: 15%;
+        &--navbar {
+            display: flex;
+            list-style-type: none;
+            & li {
+                padding-right: 20%;
+                & a {
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: white;
+                }
+                & a:hover {
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #ccc;
+                }
+            }
+        }
+    }
+}
+
+// a:active {
+//     color: blue;
+// }
+// a[tabindex]:focus {
+//     color:blue;
+//     outline: none;
+// }
