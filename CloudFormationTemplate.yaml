@@ -1,16 +1,93 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: |
-  
-Parameters:
-  
-Metadata:
-  
-Mappings:
-  
-Conditions:
+  This is a Cloudformation Template for a Static Website on EC2.
+  A static website application deployed with Apache Web Server on AWS Elastic Compute Cloud 
+  (EC2) Instance using AWS Cloudformation Service. 
+  The design of Website created by Zuvay and deployment with Apache Web Server on AWS Elastic Compute Cloud (EC2)
+  Instance using AWS Cloudformation Service is written by Feyzullah SARI.
   
 Resources:
-  
-Transform:
+  WebServerSecurityGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: Enables HTTP for Apache Web Server
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+
+  WebDesignInstance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: ami-00a205cb8e06c3c4e
+      InstanceType: t2.micro
+      KeyName: 20200824
+      SecurityGroupIds:
+        - !Ref WebServerSecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Sub Web Server of ${AWS::StackName} Stack
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash
+            yum update -y
+            yum install httpd -y
+            cd /var/www/html/
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/_hero.css
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/about.css
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/about.html
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/index.css
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/index.html
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/services.css
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/services.html
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/style.css
+
+            mkdir SASS images
+            cd SASS
+
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/SASS/_footer.scss
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/SASS/_globals.scss
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/SASS/_header.scss
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/SASS/_hero.scss
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/SASS/_navbar.scss
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/SASS/_normalize.scss
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/SASS/about.scss
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/SASS/index.scss
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/SASS/services.scss
+            wget https://raw.githubusercontent.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/master/SASS/style.scss
+
+            cd ..
+            cd images
+
+            wget https://github.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/blob/master/images/Image1.jpg
+            wget https://github.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/blob/master/images/Image2.jpg
+            wget https://github.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/blob/master/images/Image3.jpg
+            wget https://github.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/blob/master/images/clarusway_logo.png
+            wget https://github.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/blob/master/images/cropped-favicon-300x300.png
+            wget https://github.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/blob/master/images/lighthouse-icon.png
+            wget https://github.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/blob/master/images/logo_brush.png
+            wget https://github.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/blob/master/images/logo_css.png
+            wget https://github.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/blob/master/images/logo_html.png
+            wget https://github.com/datazuvay/24_statik_web_page_design_sass_flex_responsive/blob/master/images/showcase.jpg
+
+
+
+
+
+            systemctl start httpd
+            system enable httpd
+
   
 Outputs:
+  WebsiteURL:
+    Value: !Sub 
+      - http://${PublicAddress}
+      - PublicAddress: !GetAtt WebDesignInstance.PublicDnsName
+    Description: Zuvay-FLoveARTh WebPage URL
